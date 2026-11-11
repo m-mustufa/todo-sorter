@@ -1,5 +1,7 @@
 # Auto Delete Todo List
 
+**Live demo:** https://m-mustufa.github.io/todo-sorter/
+
 React + TypeScript (Vite). Click an item to sort it into Fruit or Vegetable.
 After 5 seconds it goes back to the bottom of the basket. Click it in its
 column to send it back right away.
@@ -15,3 +17,7 @@ npm run build   # production build in dist/
 - `hooks/columnsReducer.ts`: pure state transitions (`move`, `return`). `return` is idempotent, so a timer firing and a click can't double-move an item.
 - `hooks/useAutoReturnColumns.ts`: one timeout per item (so every item gets its own 5s), cleared on manual return and on unmount.
 - `components/Column.tsx`: one presentational component for all three columns.
+
+## Deployment
+Every push to `main` runs the tests, builds the app and publishes it to
+GitHub Pages (`.github/workflows/deploy.yml`).
