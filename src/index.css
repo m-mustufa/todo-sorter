@@ -1,0 +1,106 @@
+:root {
+  --paper: #f6f4ef;
+  --ink: #1f2a24;
+  --muted: #667068;
+  --line: #d9d5ca;
+  --fruit: #e8702a;
+  --fruit-soft: #fde9dc;
+  --veg: #2f7d4f;
+  --veg-soft: #dcf0e3;
+  --radius: 10px;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  color: var(--ink);
+  background: var(--paper);
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; min-height: 100vh; }
+
+.app {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 40px 20px 64px;
+}
+
+h1 { margin: 0 0 6px; font-size: 1.9rem; letter-spacing: -0.02em; }
+.app__hint { margin: 0 0 28px; color: var(--muted); max-width: 52ch; line-height: 1.5; }
+
+.board {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  gap: 16px;
+  align-items: start;
+}
+
+.column {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 16px;
+  min-height: 320px;
+  background: #fff;
+}
+.column--fruit { background: var(--fruit-soft); border-color: transparent; }
+.column--vegetable { background: var(--veg-soft); border-color: transparent; }
+
+.column__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 14px;
+}
+.column__header h2 { margin: 0; font-size: 1.05rem; }
+.column__count { color: var(--muted); font-variant-numeric: tabular-nums; }
+
+.column__items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.column--fruit .column__items,
+.column--vegetable .column__items { flex-direction: column; flex-wrap: nowrap; }
+
+.column__empty { margin: 8px 0 0; color: var(--muted); font-size: 0.9rem; }
+
+.chip {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  padding: 10px 16px;
+  font: inherit;
+  font-weight: 500;
+  text-align: left;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+.column--list .chip { width: auto; }
+.chip:hover { border-color: var(--ink); }
+.chip:focus-visible { outline: 3px solid #1f6feb; outline-offset: 2px; }
+
+.column--fruit .chip { background: #fff; border-color: var(--fruit); }
+.column--vegetable .chip { background: #fff; border-color: var(--veg); }
+
+.chip__countdown {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 100%;
+  transform-origin: left;
+  animation: drain linear forwards;
+}
+.column--fruit .chip__countdown { background: var(--fruit); }
+.column--vegetable .chip__countdown { background: var(--veg); }
+
+@keyframes drain { to { transform: scaleX(0); } }
+
+@media (max-width: 720px) {
+  .board { grid-template-columns: 1fr; }
+  .column { min-height: 0; }
+}
